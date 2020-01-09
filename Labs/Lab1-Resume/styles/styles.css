@@ -1,5 +1,5 @@
 body {
-    background-color: #222D34;
+    background-color: #292C2C;
     color: #A8ADB0;
 }
 
@@ -18,4 +18,45 @@ body {
 
 .table {
     color: #A8ADB0;
+}
+
+.highlight {
+    font-style: italic;
+    color: #53CFDF;
+}
+
+#jsIcon {
+    color: #F7DF1D;
+}
+
+#htmlIcon {
+    color: #F16528;
+}
+
+#cssIcon {
+    color: #2D68F4;
+}
+
+#vhdlIcon {
+    color: #07A582;
+}
+
+#pythonIcon {
+    color: #3672A4;
+}
+
+#cIcon {
+    color: #2A3495;
+}
+
+#cplusplusIcon {
+    color: #5DBCD2;
+}
+
+#javaIcon {
+    color: #E51837;
+}
+
+#angularIcon {
+    color: #DE0031;
 }
