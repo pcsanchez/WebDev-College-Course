@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -15,13 +16,11 @@
             </ul>
         </nav>
     </header>
-
     <aside>
       <p>This is the sidebar!</p>
     </aside>
 
     <h2> Welcome to our menu! </h2>
-
     <section>
       <table>
         <thead>
@@ -72,22 +71,26 @@
 
     <form action="" method="GET">
       <fieldset>
+        <span>
+          Francisco Carlos Sanchez Ramirez
+        </span>
+
         <legend>Leave us a comment</legend>
         <label for="firstnameInput">
-          First name : <input type="text" id="firstnameInput">
+          First name : <input type="text" id="firstnameInput" class="formElement">
         </label>
         <label for="lastnameInput">
-          Last name : <input type="text" id="lastnameInput">
+          Last name : <input type="text" id="lastnameInput" class="formElement">
         </label>
         <label for="emailInput">
-          Email : <input type="email" id="emailInput">
+          Email : <input type="email" id="emailInput" class="formElement">
         </label>
         <label for="phonenumberInput">
-          Phone number : <input type="tel" id="phonenumberInput">
+          Phone number : <input type="tel" id="phonenumberInput" class="formElement">
         </label>
 
         Rate us:
-        <select name="rate">
+        <select name="rate" id="rate">
             <option value="very_good">Very good</option>
             <option value="good">Good</option>
             <option value="okay">Okay</option>
@@ -106,7 +109,11 @@
         </label>
 
         <label for="submitButton">
-          <input type="submit" id="submitButton" value="Submit">
+          <input type="submit" id="submitButton" value="Submit" class="clickable">
+        </label>
+
+        <label for=resetButton>
+          <input type="reset" id="resetButton" value="Reset" class="clickable">
         </label>
       </fieldset>
     </form>
@@ -117,5 +124,3 @@
 
   </body>
 </html>
-
- 

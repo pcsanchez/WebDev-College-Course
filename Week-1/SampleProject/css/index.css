@@ -18,3 +18,110 @@ fieldset {
     padding: 20px;
     border: 2px dashed #DDDDDD;
 }
+
+legend {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+fieldset > span {
+    color: #6278B0;
+    padding: 20px 40px;
+    display: block;
+    background-color: #CCE9E8;
+    background: url('./../img/juanito.jpg') no-repeat center left #CCE9F8;
+    background-size: 40px 40px;
+    border: 1px solid #6278B0;
+    margin-bottom: 10px;
+}
+
+.formElement {
+    padding: 5px 10px;
+    width: 300px;
+}
+
+select[name=rate] {
+    font-size: 14px;
+    width: 250px;
+}
+
+#submitButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 0;
+}
+
+#submitButton, #resetButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 0;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#submitButton {
+    background-color: #56C56F;
+}
+
+#resetButton {
+    background-color: #D9534F;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+#submitButton:hover {
+    background-color: black;
+}
+
+table {
+    border: 1px solid #eee;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    color: #999;
+    border: 1px solid #eee;
+    padding: 15px 35px;
+}
+
+th {
+    color: white;
+    background-color: #55B3C5;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    color: #555;
+    background-color: #F4F4F4;
+}
+
+td:hover {
+    color: #555;
+}
+
+ul {
+    background-color: #ccc;
+    list-style: none;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+    padding: 20px;
+}
+
+li > a {
+    text-decoration: none;
+    color: #4F545F;
+}
+
+li:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #999;
+}
