@@ -9,7 +9,7 @@
   <body>
     <header>
         <nav>
-            <ul>
+            <ul id="nav">
               <li><a href='/index.html'>Home</a></li>
               <li><a href='/about.html'>About</a></li>
               <li><a href='/review.html'>Reviews</a></li>
@@ -69,52 +69,69 @@
       </table>
     </section>
 
-    <form action="" method="GET">
+    <form id="commentForm">
       <fieldset>
         <span>
           Francisco Carlos Sanchez Ramirez
         </span>
 
         <legend>Leave us a comment</legend>
-        <label for="firstnameInput">
-          First name : <input type="text" id="firstnameInput" class="formElement">
-        </label>
-        <label for="lastnameInput">
-          Last name : <input type="text" id="lastnameInput" class="formElement">
-        </label>
-        <label for="emailInput">
-          Email : <input type="email" id="emailInput" class="formElement">
-        </label>
-        <label for="phonenumberInput">
-          Phone number : <input type="tel" id="phonenumberInput" class="formElement">
-        </label>
+
+        <div id="firstNameField">
+          <label for="firstnameInput">
+            First name : <input type="text" id="firstNameInput" class="formElement">
+          </label>
+        </div>
+
+        <div class="inputField">
+          <label for="lastnameInput">
+            Last name : <input type="text" id="lastNameInput" class="formElement">
+          </label>
+        </div>
+
+        <div class="inputField">
+          <label for="emailInput">
+            Email : <input type="email" id="emailInput" class="formElement">
+          </label>
+        </div>
+
+        <div class="inputField">
+          <label for="phonenumberInput">
+            Phone number : <input type="tel" id="phonenumberInput" class="formElement">
+          </label>
+        </div>
 
         Rate us:
-        <select name="rate" id="rate">
+
+        <div>
+          <select name="rate" id="rate">
+            <option value="pls">Please Choose an Option</option>
             <option value="very_good">Very good</option>
             <option value="good">Good</option>
             <option value="okay">Okay</option>
             <option value="not_good">Not Good</option>
             <option value="bad">Bad</option>
         </select>
+        </div>
 
         Your comment:
-        <textarea cols="50" rows="4"></textarea>
+        <div>
+          <textarea cols="50" rows="4" id="commentTextArea"></textarea>
+        </div>
         Would you visit us again?
-        <label for="yesInput">
-          Yes : <input type="radio" name="visit" id="yesInput">
-        </label>
-        <label for="noInput">
-          No : <input type="radio" name="visit" id="noInput">
-        </label>
+        <div>
+          <label for="yesInput">
+            Yes : <input type="radio" name="visit" id="yesInput">
+          </label>
+        </div>
+        <div>
+          <label for="noInput">
+            No : <input type="radio" name="visit" id="noInput">
+          </label>
+        </div>
 
-        <label for="submitButton">
-          <input type="submit" id="submitButton" value="Submit" class="clickable">
-        </label>
-
-        <label for=resetButton>
-          <input type="reset" id="resetButton" value="Reset" class="clickable">
-        </label>
+        <input type="reset" id="resetButton" value="Reset" class="clickable">
+        <input type="submit" id="submitButton" value="Submit" class="clickable">
       </fieldset>
     </form>
     <footer>
@@ -122,5 +139,6 @@
     footer would go
     </footer>
 
+    <script type="text/javascript" src="./js/index.js"></script>
   </body>
 </html>

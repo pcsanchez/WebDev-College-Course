@@ -125,3 +125,7 @@ li:hover {
     color: white;
     background-color: #999;
 }
+
+.notValid {
+    color: red;
+}
