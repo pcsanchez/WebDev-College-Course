@@ -2,6 +2,7 @@ let express = require('express');
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
 let jsonParser = bodyParser.json();
+let { StudentList } = require('./model')
 
 app = express();
 
