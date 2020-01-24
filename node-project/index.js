@@ -1,8 +1,9 @@
-let express = require('express');
-let morgan = require('morgan');
-let bodyParser = require('body-parser');
-let jsonParser = bodyParser.json();
-let { StudentList } = require('./model')
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const jsonParser = bodyParser.json();
+const { StudentList } = require('./model')
 
 app = express();
 
@@ -32,46 +33,82 @@ let estudiantes = [{
 
 app.get("/api/students", ( req, res ) => {
 
-    return res.status(200).json(estudiantes);
+    StudentList.getAll()
+        .then(studentList => {
+            return res.status(200).json(studentList);
+        })
+        .catch( error => {
+            res.statusMessage = "Hubo un error de conexion con la BD.";
+            return res.status(500).send();
+        });
+
 });
+
+app.get("/api/getById/:id", (req,res) => {
+    let id = req.params.id;
+
+    StudentList.getById(id)
+        .then( student => {
+            if(student === null) {
+                return res.status(404).send();
+            }
+            return res.status(200).json(student);
+        })
+        .catch( error => {
+            res.statusMessage = "Hubo un error de conexion con la BD.";
+            return res.status(500).send();
+        })
+})
 
 app.get("/api/getByName/:name", (req, res)=>{
     let name = req.params.name;
 
-    let result = estudiantes.filter((elemento) => {
-        if(elemento.nombre == name) {
-            return elemento;
-        }
-    });
-
-    if(result.length > 0){
-        return res.status(200).json(result);
-    } else {
-        res.statusMessage = "El alumno no se encuentra en la lista";
-        return res.status(404).send();
-    }
+    StudentList.getByName(name)
+        .then( student => {
+            if(student.length < 1) {
+                res.status(404).send();
+            }
+            return res.status(200).json(student);
+        })
+        .catch( error => {
+            res.statusMessage = "Hubo un error de conexion con la BD.";
+            return res.status(500).send();
+        })
 })
 
 app.post('/api/newStudent', jsonParser, (req, res)=> {
     if(!req.body.hasOwnProperty('nombre') || !req.body.hasOwnProperty('apellido') || !req.body.hasOwnProperty('matricula')) {
         return res.status(406).send();
     }
-    let matriculas = estudiantes.map(function(estudiante) {
-        return estudiante.matricula;
-    })
 
-    if(matriculas.includes(req.body.matricula)) {
-        return res.status(409).send();
-    }
-
-    let {nombre, apellido, matricula} = req.body;
-
-    estudiantes.push({
-        "nombre": nombre,
-        "apellido": apellido,
-        "matricula": matricula
-    });
-    return res.status(201).json(req.body);
+    StudentList.getById(req.body.matricula)
+        .then( student => {
+            if(student != null) {
+                res.statusMessage = "Ese estudiante ya esta registrado.";
+                return res.status(409).send();
+            }
+        
+            let {nombre, apellido, matricula} = req.body;
+        
+            let estudiante = {
+                "nombre": nombre,
+                "apellido": apellido,
+                "matricula": matricula
+            };
+        
+            StudentList.createNewStudent(estudiante)
+                .then( student => {
+                    return res.status(201).json(student);
+                })
+                .catch( error => {
+                    res.statusMessage = "Hubo un error de conexion en la BD.";
+                    return res.status(500).send();
+                })
+        })
+        .catch( error => {
+            res.statusMessage = "Hubo un error de conexion con la BD.";
+            return res.status(500).send();
+        });
 })
 
 app.put('/api/updateStudent/:id', jsonParser, (req, res)=> {
@@ -130,6 +167,45 @@ app.delete("/api/deleteStudent", jsonParser, (req, res) =>{
 
 })
 
-app.listen(8080, ()=>{
-    console.log("Server has started in port 8080");
-})
+let server;
+
+function runServer(port, databaseUrl){
+    return new Promise( (resolve, reject ) => {
+        mongoose.connect(databaseUrl, response => {
+            if ( response ){
+                return reject(response);
+            }
+            else{
+                server = app.listen(port, () => {
+                    console.log( "App is running on port " + port );
+                    resolve();
+                })
+                .on( 'error', err => {
+                    mongoose.disconnect();
+                    return reject(err);
+                })
+            }
+        });
+    });
+   }
+   
+   function closeServer(){
+        return mongoose.disconnect()
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    console.log('Closing the server');
+                    server.close( err => {
+                        if (err){
+                            return reject(err);
+                        }
+                        else{
+                            resolve();
+                        }
+                    });
+                });
+            });
+   }
+
+   runServer(8080, "mongodb://localhost/university");
+
+   module.exports = { app, runServer, closeServer }

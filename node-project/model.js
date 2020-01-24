@@ -8,7 +8,7 @@ let studentCollection = mongoose.Schema({
     matricula: {
         type: Number,
         required: true,
-        unique: TextTrackCueList
+        unique: true
     }
 });
 
@@ -23,6 +23,34 @@ let StudentList = {
             .catch( error => {
                 throw Error(error);
             });
+    },
+    getByName: function(name) {
+        return Student.find({nombre: name})
+            .then( student => {
+                return student;
+            })
+            .catch( error => {
+                throw Error(error);
+            })
+    },
+    getById: function(id) {
+        return Student.findOne({matricula: id})
+            .then( student => {
+                console.log(student);
+                return student;
+            })
+            .catch( error => {
+                throw Error(error);
+            })
+    },
+    createNewStudent: function(student) {
+        return Student.create(student)
+            .then( res => {
+                return res;
+            })
+            .catch( error => {
+                throw Error(error);
+            })
     }
 };
 
